@@ -1,6 +1,6 @@
 import re
 
-#Reads an assembly language command, parses it,
+#Read an assembly language command, parses it,
 #and provides convenient access to the command’s components
 class Parser:
     
@@ -10,7 +10,7 @@ class Parser:
         self.command = -1
         self.advance()
 
-    #Reads the next command from the input and makes it the current command. 
+    #Read the next command from the input and makes it the current command. 
     def advance(self):
         while True:
 
@@ -51,7 +51,7 @@ class Parser:
             self.command = 2
             return 2
     
-    #Returns the symbol of the current command when commandType() is  A_COMMAND or L_COMMAND.
+    #Return the symbol of the current command when commandType() is  A_COMMAND or L_COMMAND.
     def symbol(self):
        
         if self.command == 0:
@@ -63,7 +63,7 @@ class Parser:
         else:
             return None
 
-    #Returns the dest mnemonic in the current C-command 
+    #Return the dest mnemonic in the current C-command 
     def dest(self):
         
         tmp = self.instruction.split('=')
@@ -74,7 +74,7 @@ class Parser:
         else:
             return 'null'
 
-    #Returns the comp mnemonic in the current C-command 
+    #Return the comp mnemonic in the current C-command 
     def comp(self):
         
         a = self.instruction.split('=')        
@@ -86,7 +86,7 @@ class Parser:
             b = a[0].split(';')
             return b[0]
     
-    #Returns the jump mnemonic in the current C-command
+    #Return the jump mnemonic in the current C-command
     def jump(self):
         
         a = self.instruction.split('=')        
