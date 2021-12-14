@@ -18,13 +18,15 @@ i_ram = 16
 while (x.hasMoreCommands()):
     
     cmd = x.commandType()
-    
-    if cmd == 0:                    # if command == L_COMMAND
+    # if command == L_COMMAND
+    if cmd == 0:                   
         s = x.symbol()
         if not z.contains(s):      
-            z.addEntry(s, i_rom)    # Add symbol to SymbolTable
+            # Add symbol to SymbolTable
+            z.addEntry(s, i_rom)   
     else:
-        i_rom += 1                  # ROM Adrress + 1
+        # ROM Adrress + 1
+        i_rom += 1                 
 
     x.advance()
 
@@ -35,30 +37,29 @@ while (x.hasMoreCommands()):
 file = open(argv[1].rstrip('.asm') + '.hack', 'w')      
 
 while (w.hasMoreCommands()):
-    
     cmd = w.commandType()
-    
-    if cmd == 1:                            # if command == A_COMMAND
-
+    # if command == A_COMMAND
+    if cmd == 1:                           
         s = w.symbol()
-
-        if not s.isdigit():                 # if is symbol
-
-            if z.contains(s):               # if found symbol
-
+        # if is symbol
+        if not s.isdigit():               
+            # if found symbol
+            if z.contains(s):              
                 addr = z.GetAddress(s)
-
             else:
-                z.addEntry(s, i_ram)        # Add variable name to SymbolTable
+                # Add variable name to SymbolTable
+                z.addEntry(s, i_ram)        
                 addr = i_ram
-                i_ram += 1                  # RAM Adrress + 1
+                # RAM Adrress + 1
+                i_ram += 1                  
         else:
             addr = s
 
         # Write binary A_COMMAND 
         file.write('{:16b}'.format(int(addr)).replace(' ', '0') + '\n')
     
-    elif cmd == 2:                          # if command == C_COMMAND
+    # if command == C_COMMAND
+    elif cmd == 2:                         
         
         a = w.comp()
         b = w.dest()
@@ -72,8 +73,7 @@ while (w.hasMoreCommands()):
         file.write('111' + d + e +f + '\n')
 
     w.advance()
-
-
+# Close file .hack
 file.close()
 
    
