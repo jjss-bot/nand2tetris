@@ -40,7 +40,7 @@ CHIP CPU {
 
     PARTS:
     
-    /* A Register*/
+    /*-------------A Register---------------*/
     
     // MuxtoRegisterA = (instruction[15] == 1) ? fxy : instruction
     Mux16(a = instruction, b = fxy, sel = instruction[15], out = toA);
@@ -53,7 +53,7 @@ CHIP CPU {
     ARegister(in = toA, load = loadA, out = dataA);
     
     
-    /* Ram */
+    /*----------------Ram--------------------*/
     
     // ddressM = ARegister
     And16(a = dataA, b = true, out[0..14] = addressM);
@@ -65,7 +65,7 @@ CHIP CPU {
     And16(a = fxy, b = true, out = outM);
     
     
-    /* D Register*/
+    /*---------------D Register------------*/
     
     // Load DRegister = instruction[15] & instruction[4]
     And(a = instruction[15], b = instruction[4], out = loadD);
@@ -74,7 +74,7 @@ CHIP CPU {
     DRegister(in = fxy, load = loadD, out = x);
     
     
-    /* ALU */
+    /*------------------ALU---------------*/
     
     // Y = (instruction[12] == 1) ? inM : dataA
     Mux16(a = dataA , b = inM, sel = instruction[12], out = y);
@@ -84,7 +84,7 @@ CHIP CPU {
      	ny = instruction[8], f = instruction[7], no = instruction[6], out = fxy, zr = zero, ng = negative);
     
     
-    /* Program Counter*/
+    /*-------------Program Counter-----------*/
     
     // loadPC = instruction[15] & (jmp | jgt | jeq | jlt)
     
