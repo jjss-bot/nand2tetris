@@ -1,3 +1,3 @@
-# nand2tetris
+# Nand2Tetris
 
-nand2tetris part1 projects
+Nand2Tetris part1 assignments
